@@ -12,7 +12,6 @@ import { Admin } from "./pages/Admin";
 import { ManageUsers } from "./pages/ManageUsers";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { Home } from "./pages/Home";
-import { RegisterTwo } from "./pages/RegisterTwo";
 
 // Define routes
 const router = createBrowserRouter([

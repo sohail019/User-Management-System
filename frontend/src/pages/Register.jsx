@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { ThemeContext } from "../contexts/ThemeContext";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { IoMdLock, IoMdMail, IoMdPerson } from "react-icons/io";
 
@@ -60,7 +59,7 @@ export const Register = () => {
 
   return (
     <>
-      <section className="flex items-center justify-center h-screen">
+      <section className="flex items-center justify-center ">
         <div className="flex flex-col lg:flex-row w-full max-w-4xl mx-auto sm:px-40 md:px-64 lg:px-64">
           <main className="flex flex-col justify-center flex-grow  p-6 rounded-lg ">
             <h1 className="text-2xl font-bold sm:text-3xl md:text-4xl text-center">

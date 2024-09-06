@@ -7,14 +7,14 @@ function App() {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <>
+    <div className={`${
+          theme === "dark" ? "dark" : ""
+        }bg-white text-black dark:bg-[#131314] dark:text-[#c4c7c5] h-screen`}>
       <Header />
-    <div className={`${theme === "dark" ? "dark" : ""} bg-white text-black dark:bg-[#131314] dark:text-[#c4c7c5] min-h-screen`}>
-      <main>
-        <Outlet />
-      </main>
+      <div className="mt-14">
+          <Outlet />
+      </div>
     </div>
-    </>
   );
 }
 
