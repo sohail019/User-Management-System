@@ -1,5 +1,5 @@
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 
 export const Admin = () => {
@@ -41,14 +41,12 @@ export const Admin = () => {
       <h2>Admin Dashboard</h2>
       <ul>
         {users.map((user) => (
-          <>
-            <li key={user._id}>
-              <p>Username: {user.username}</p>
-              <p>Email: {user.email}</p>
-              <p>Role: {user.role}</p>
-            </li>
-             <button onClick={() => handleDelete(user._id)}>Delete</button>
-          </>
+          <li key={user._id}>
+            <p>Username: {user.username}</p>
+            <p>Email: {user.email}</p>
+            <p>Role: {user.role}</p>
+            <button onClick={() => handleDelete(user._id)}>Delete</button>
+          </li>
         ))}
       </ul>
     </div>

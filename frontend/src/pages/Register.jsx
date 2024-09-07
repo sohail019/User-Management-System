@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IoMdLock, IoMdMail, IoMdPerson } from "react-icons/io";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 
 export const Register = () => {
   const [username, setUsername] = useState("");
@@ -10,7 +11,25 @@ export const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [role, setRole] = useState("Regular User");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(prev => !prev);
+  };
+
+  useEffect(() => {
+    const checkAuthStatus = () => {
+      const token = localStorage.getItem("token")
+      if(token){
+        navigate("/profile") //? redirect to profile if user logged in
+      } else{
+        setLoading(false)
+      }
+    }
+    checkAuthStatus()
+  }, [navigate])
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -62,6 +81,10 @@ export const Register = () => {
     }
   };
 
+  if(loading) {
+    return <div className="text-center text-xl">Loading...</div>
+  }
+
   return (
     <section className="flex items-center justify-center">
       <div className="flex flex-col lg:flex-row w-full max-w-4xl mx-auto sm:px-40 md:px-64 lg:px-64">
@@ -85,7 +108,7 @@ export const Register = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5"
+                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:text-black"
                   placeholder="email@digitalsalt.in"
                 />
               </div>
@@ -103,7 +126,7 @@ export const Register = () => {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
-                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5"
+                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:text-black"
                   placeholder="Username"
                 />
               </div>
@@ -117,13 +140,24 @@ export const Register = () => {
                   <IoMdLock className="text-gray-500" />
                 </div>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5"
+                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:text-black"
                   placeholder="Password"
                 />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute inset-y-0 end-0 flex items-center pe-3 cursor-pointer"
+                >
+                  {showPassword ? (
+                    <FaEyeSlash className="text-gray-500" />
+                  ) : (
+                    <FaEye className="text-gray-500" />
+                  )}
+                </button>
               </div>
             </div>
 
@@ -141,9 +175,10 @@ export const Register = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5"
+                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:text-black"
                   placeholder="Confirm Password"
                 />
+                
               </div>
             </div>
 
@@ -153,7 +188,7 @@ export const Register = () => {
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+                className="bg-gray-50 dark:text-black border border-gray-300 text-sm rounded-lg block w-full p-2.5"
               >
                 <option value="Regular">Regular</option>
                 <option value="Admin">Admin</option>
