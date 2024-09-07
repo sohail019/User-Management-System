@@ -11,7 +11,7 @@ function App() {
           theme === "dark" ? "dark" : ""
         }bg-white text-black dark:bg-[#131314] dark:text-[#c4c7c5] h-screen`}>
       <Header />
-      <div className="mt-14">
+      <div className="mt-8">
           <Outlet />
       </div>
     </div>

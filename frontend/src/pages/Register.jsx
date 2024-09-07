@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { IoMdLock, IoMdMail, IoMdPerson } from "react-icons/io";
 
 export const Register = () => {

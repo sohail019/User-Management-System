@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 export const Header = () => {
   const { theme, toggleTheme } = useContext(ThemeContext); // Access theme and toggleTheme
@@ -22,12 +23,16 @@ export const Header = () => {
             {/* Theme toggle */}
             <div
               onClick={toggleTheme}
-              className="flex items-center cursor-pointer mr-4"
+              className="flex items-center cursor-pointer mr-4 text-xl"
             >
               {theme === "light" ? (
-                <span className="text-gray-900">🌞</span> // Light mode icon
+                <span className="text-gray-900">
+                  <MdLightMode />
+                </span> // Light mode icon
               ) : (
-                <span className="text-gray-100">🌙</span> // Dark mode icon
+                <span className="text-gray-100">
+                  <MdDarkMode />
+                </span> // Dark mode icon
               )}
               <p className="ml-2 text-sm text-gray-900 dark:text-gray-100">
                 {theme === "light" ? "Light Mode" : "Dark Mode"}
@@ -35,17 +40,17 @@ export const Header = () => {
             </div>
             {/* Login button */}
             <Link
-              to="#"
+              to="/login"
               className="text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
             >
               Log in
             </Link>
             {/* Get Started button */}
             <Link
-              to="#"
+              to="/register"
               className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
             >
-              Get started
+              Register
             </Link>
           </div>
           <div
