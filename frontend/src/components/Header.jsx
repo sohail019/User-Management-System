@@ -41,7 +41,7 @@ export const Header = () => {
             {/* Login button */}
             <Link
               to="/login"
-              className="text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+              className="text-gray-900 dark:text-gray-100  hover:bg-orange-800 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
             >
               Log in
             </Link>
@@ -66,7 +66,7 @@ export const Header = () => {
                       isActive
                         ? "text-orange-700"
                         : "text-gray-700 dark:text-gray-100"
-                    } border-b border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                   }
                 >
                   Home
@@ -80,7 +80,7 @@ export const Header = () => {
                       isActive
                         ? "text-orange-700"
                         : "text-gray-700 dark:text-gray-100"
-                    } border-b border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                   }
                 >
                   Register
@@ -95,7 +95,7 @@ export const Header = () => {
                       isActive
                         ? "text-orange-700"
                         : "text-gray-700 dark:text-gray-100"
-                    } border-b border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                   }
                 >
                   Login
@@ -109,7 +109,7 @@ export const Header = () => {
                       isActive
                         ? "text-orange-700"
                         : "text-gray-700 dark:text-gray-100"
-                    } border-b border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                   }
                 >
                   Profile
