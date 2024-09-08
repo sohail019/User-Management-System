@@ -35,14 +35,19 @@ router.post("/register", async (req, res) => {
 
 // Login user and return a jwt token
 router.post("/login", async (req, res) => {
-  console.log("Login route hit");
-  const { email, password } = req.body;
-
   try {
-    const user = await User.findOne({ email });
-    console.log(user);
+    const { email, password } = req.body;
+    const user = await User.findOne({ email }).exec(); // Ensure to call exec()
 
-    if (!user || !(await user.matchPassword(password))) {
+    if (!user) {
+      return res.status(401).json({ error: "Invalid Credentials" });
+    }
+
+    // Verify the instance
+    console.log("User object type:", user.constructor.name);
+
+    const isPasswordMatch = await user.matchPassword(password);
+    if (!isPasswordMatch) {
       return res.status(401).json({ error: "Invalid Credentials" });
     }
 
@@ -57,7 +62,8 @@ router.post("/login", async (req, res) => {
       user: { id: user._id, username: user.username, role: user.role },
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Error in login route:", error.message);
+    res.status(500).json({ error: "Server error" });
   }
 });
 

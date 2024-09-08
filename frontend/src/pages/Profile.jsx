@@ -7,13 +7,11 @@ export const Profile = () => {
   const [editMode, setEditMode] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(true);
   const { user, logout } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
   useEffect(() => {
     const fetchProfile = async () => {
-      setLoading(true);
       try {
         const res = await axios.get("/api/auth/profile", {
           headers: {
@@ -25,8 +23,6 @@ export const Profile = () => {
         setEmail(res.data.email);
       } catch (error) {
         console.error("Error fetching profile:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -51,9 +47,6 @@ export const Profile = () => {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>; // Display loading indicator while fetching
-  }
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">

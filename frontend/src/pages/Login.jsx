@@ -10,22 +10,13 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
-    setShowPassword(prev => !prev)
-  }
-  useEffect(() => {
-    const checkAuthStatus = () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        navigate("/profile");
-      } 
-    }
-    checkAuthStatus()
-  }, [navigate])
+    setShowPassword((prev) => !prev);
+  };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();

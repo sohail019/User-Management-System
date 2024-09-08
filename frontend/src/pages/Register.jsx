@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IoMdLock, IoMdMail, IoMdPerson } from "react-icons/io";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; 
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export const Register = () => {
   const [username, setUsername] = useState("");
@@ -12,24 +12,11 @@ export const Register = () => {
   const [error, setError] = useState("");
   const [role, setRole] = useState("Regular User");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
-    setShowPassword(prev => !prev);
+    setShowPassword((prev) => !prev);
   };
-
-  useEffect(() => {
-    const checkAuthStatus = () => {
-      const token = localStorage.getItem("token")
-      if(token){
-        navigate("/profile") //? redirect to profile if user logged in
-      } else{
-        setLoading(false)
-      }
-    }
-    checkAuthStatus()
-  }, [navigate])
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -80,10 +67,6 @@ export const Register = () => {
       console.error("Error During Registration", err);
     }
   };
-
-  if(loading) {
-    return <div className="text-center text-xl">Loading...</div>
-  }
 
   return (
     <section className="flex items-center justify-center">
@@ -178,7 +161,6 @@ export const Register = () => {
                   className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:text-black"
                   placeholder="Confirm Password"
                 />
-                
               </div>
             </div>
 
