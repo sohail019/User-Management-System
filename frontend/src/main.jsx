@@ -9,7 +9,6 @@ import "./index.css";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Admin } from "./pages/Admin";
-import { ManageUsers } from "./pages/ManageUsers";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { Home } from "./pages/Home";
 import ConditionalRoute from "./components/ConditionalRoute";
@@ -53,10 +52,6 @@ const router = createBrowserRouter([
       {
         path: "/admin",
         element: <ProtectedRoute element={<Admin />} roles={["Admin"]} />,
-      },
-      {
-        path: "/manage-users",
-        element: <ProtectedRoute element={<ManageUsers />} roles={["Admin"]} />,
       },
     ],
   },

@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }) => {
           );
 
           // Successfully fetched user profile
+          console.log("User profile fetched:", response.data);
           setUser(response.data);
         } catch (error) {
           console.error("Failed to fetch user profile:", error);
