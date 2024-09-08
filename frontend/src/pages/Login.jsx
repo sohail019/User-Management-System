@@ -65,7 +65,7 @@ export const Login = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:text-black"
+                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                   placeholder="email@digitalsalt.in"
                 />
               </div>
@@ -83,7 +83,7 @@ export const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:text-black"
+                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                   placeholder="Password"
                 />
                 <button

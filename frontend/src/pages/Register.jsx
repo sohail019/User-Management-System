@@ -29,14 +29,14 @@ export const Register = () => {
     }
 
     // Password validation
-    // const minPasswordLength = 8;
-    // const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])/;
-    // if (!passwordRegex.test(password) || password.length < minPasswordLength) {
-    //   setError(
-    //     "Password must be at least 8 characters and include uppercase, lowercase, numbers, and special characters."
-    //   );
-    //   return;
-    // }
+    const minPasswordLength = 8;
+    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])/;
+    if (!passwordRegex.test(password) || password.length < minPasswordLength) {
+      setError(
+        "Password must be at least 8 characters and include uppercase, lowercase, numbers, and special characters."
+      );
+      return;
+    }
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
@@ -91,7 +91,7 @@ export const Register = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:text-black"
+                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                   placeholder="email@digitalsalt.in"
                 />
               </div>
@@ -109,7 +109,7 @@ export const Register = () => {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
-                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:text-black"
+                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                   placeholder="Username"
                 />
               </div>
@@ -127,7 +127,7 @@ export const Register = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:text-black"
+                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                   placeholder="Password"
                 />
                 <button
@@ -158,7 +158,7 @@ export const Register = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:text-black"
+                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                   placeholder="Confirm Password"
                 />
               </div>
@@ -170,7 +170,7 @@ export const Register = () => {
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                className="bg-gray-50 dark:text-black border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+                className="bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
               >
                 <option value="Regular">Regular</option>
                 <option value="Admin">Admin</option>
