@@ -1,16 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const Profile = () => {
   const [profile, setProfile] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, loading } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+   const navigate = useNavigate();
 
   useEffect(() => {
+       if (!loading && !user) {
+         navigate("/login"); // Redirect if not logged in and loading is done
+         return;
+       }
+    
     const fetchProfile = async () => {
       try {
         const res = await axios.get("/api/auth/profile", {
@@ -23,11 +30,14 @@ export const Profile = () => {
         setEmail(res.data.email);
       } catch (error) {
         console.error("Error fetching profile:", error);
+        navigate("/login");
       }
     };
 
-    fetchProfile();
-  }, []);
+    if(user){
+      fetchProfile();
+    }
+  }, [user, loading, navigate]);
 
   const handleUpdate = async () => {
     try {
@@ -46,6 +56,14 @@ export const Profile = () => {
       console.error("Error updating profile:", error);
     }
   };
+
+   if (loading) {
+     return <p>Loading...</p>; // Show a loading state while checking auth
+   }
+
+   if (!user) {
+     return null; // Avoid rendering the page if the user is not authenticated
+   }
 
 
   return (
@@ -111,10 +129,10 @@ export const Profile = () => {
           ) : (
             <div className="space-y-4">
               <p className="text-lg font-semibold text-gray-800">
-                <strong>Username:</strong> {profile.username}
+                <strong>Username:</strong> {user.username}
               </p>
               <p className="text-lg font-semibold text-gray-800">
-                <strong>Email:</strong> {profile.email}
+                <strong>Email:</strong> {user.email}
               </p>
               <p className="text-lg font-semibold text-gray-800">
                 <button

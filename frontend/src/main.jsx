@@ -12,6 +12,7 @@ import { Admin } from "./pages/Admin";
 import { ManageUsers } from "./pages/ManageUsers";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { Home } from "./pages/Home";
+import ConditionalRoute from "./components/ConditionalRoute";
 
 // Define routes
 const router = createBrowserRouter([
@@ -20,8 +21,26 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/login", element: <Login /> },
-      { path: "/register", element: <Register /> },
+      {
+        path: "/login",
+        element: (
+          <ConditionalRoute
+            element={<Login />}
+            redirectTo="/profile"
+            condition={(user) => user}
+          />
+        ),
+      },
+      {
+        path: "/register",
+        element: (
+          <ConditionalRoute
+            element={<Register />}
+            redirectTo="/profile"
+            condition={(user) => user}
+          />
+        ),
+      },
       {
         path: "/profile",
         element: (

@@ -7,24 +7,62 @@ export const AuthProvider = ({ children }) => {
   // State for user and token
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //    const token = localStorage.getItem("token");
+  //   if (token) {
+  //     console.log("Token used for profile request", token);
+  //     axios
+  //       .get("http://localhost:5000/api/auth/profile", {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       })
+  //       .then((res) => {
+  //         setUser(res.data)
+  //         setLoading(false);
+  //       })
+  //       .catch((err) => {
+  //         console.error("Failed to fetch user profile", err);
+  //         localStorage.removeItem("token");
+  //         setLoading(false)
+  //         // Handle token expiration
+  //         // setToken(null);
+  //       });
+  //   } else{
+  //     setLoading(false)
+  //   }
+  // }, []);
 
   useEffect(() => {
-    if (token) {
-      console.log("Token used for profile request", token);
-      axios
-        .get("http://localhost:5000/api/auth/profile", {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((res) => setUser(res.data))
-        .catch((err) => {
-          console.error("Failed to fetch user profile", err);
+    const fetchUserProfile = async () => {
+      const token = localStorage.getItem("token");
 
-          // Handle token expiration
-          setToken(null);
-          localStorage.removeItem("token");
-        });
-    }
-  }, [token]);
+      if (token) {
+        try {
+          console.log("Token used for profile request:", token);
+          const response = await axios.get(
+            "http://localhost:5000/api/auth/profile",
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+
+          // Successfully fetched user profile
+          setUser(response.data);
+        } catch (error) {
+          console.error("Failed to fetch user profile:", error);
+          localStorage.removeItem("token"); // Remove invalid token
+          setUser(null); // Clear user state
+        } finally {
+          setLoading(false); // Stop loading in either case
+        }
+      } else {
+        setLoading(false); // No token, stop loading
+      }
+    };
+
+    fetchUserProfile(); // Invoke the function
+  }, []);
 
   const login = async (email, password) => {
     try {
