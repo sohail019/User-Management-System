@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 import roleMiddleware from "../middlewares/roleMiddleware.js";
-import bcrypt from "bcryptjs";
 
 const router = express.Router();
 
@@ -83,20 +82,17 @@ router.get("/profile", authMiddleware, async (req, res) => {
 });
 
 // Admin route to get all users
-router.get(
-  "/users",
-  authMiddleware,
-  roleMiddleware("Admin"),
-  async (req, res) => {
-    try {
-      const users = await User.find();
-      res.json(users);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
+router.get("/users", authMiddleware, roleMiddleware("Admin"), async (req, res) => {
+  try {
+    console.log("Fetching users..."); // Debugging log
+    const users = await User.find();
+    console.log("Users found:", users); // Debugging log
+    res.json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error.message);
+    res.status(500).json({ error: error.message });
   }
-);
-
+});
 // Admin route to update user role by id
 router.put(
   "/users/:id",

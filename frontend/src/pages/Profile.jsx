@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Profile = () => {
   const [profile, setProfile] = useState({});
@@ -168,9 +168,9 @@ export const Profile = () => {
       {user.role === "Admin" && (
         <div className="mt-6 border-t pt-4 text-center">
           <h3 className="text-lg font-semibold text-gray-800">Admin Section</h3>
-          <a href="/admin" className="text-orange-500 hover:underline">
+          <Link to="/admin" className="text-orange-500 hover:underline">
             Go to Admin Dashboard
-          </a>
+          </Link>
         </div>
       )}
     </div>

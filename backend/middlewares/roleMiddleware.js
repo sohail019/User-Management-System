@@ -1,10 +1,19 @@
 // ? Role based access control
 
-const roleMiddleware = (role) => (req, res, next) => {
-    if(req.user.role !== role){
-        return res.status(403).json({error: "Access Denied"})
+const roleMiddleware = (requiredRole) => {
+  return (req, res, next) => {
+    if (req.user.role !== requiredRole) {
+      console.log(
+        "Role mismatch. User role:",
+        req.user.role,
+        "Required role:",
+        requiredRole
+      ); // Debugging log
+      return res.status(403).json({ message: "Access denied" });
     }
-    next()
-}
+    console.log("User has sufficient role:", req.user.role); // Debugging log
+    next();
+  };
+};
 
-export default roleMiddleware
+export default roleMiddleware;

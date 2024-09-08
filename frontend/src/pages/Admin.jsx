@@ -9,14 +9,16 @@ export const Admin = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("/api/auth/users", {
+        console.log("Fetching users from API..."); // Debugging log
+        const res = await axios.get("http://localhost:5000/api/auth/users", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Ensure token is sent
           },
         });
+        console.log("API response:", res.data); // Debugging log
         setUsers(res.data);
       } catch (error) {
-        console.error("Error fetching users:", error);
+        console.error("Error fetching users:", error); // Debugging log
       }
     };
 
@@ -37,18 +39,36 @@ export const Admin = () => {
   };
 
   return (
-    <div>
-      <h2>Admin Dashboard</h2>
-      <ul>
-        {users.map((user) => (
-          <li key={user._id}>
-            <p>Username: {user.username}</p>
-            <p>Email: {user.email}</p>
-            <p>Role: {user.role}</p>
-            <button onClick={() => handleDelete(user._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+    <div className="min-h-screen p-6">
+      <h2 className="text-3xl font-bold text-center mb-8">Admin Dashboard</h2>
+      <div className="container mx-auto  shadow-md rounded-lg p-6">
+        {users.length > 0 ? (
+          <ul className="space-y-4">
+            {users.map((user) => (
+              <li
+                key={user._id}
+                className=" p-4 rounded-lg shadow flex items-center justify-between"
+              >
+                <div>
+                  <p className="text-lg font-semibold">
+                    Username: {user.username}
+                  </p>
+                  <p>Email: {user.email}</p>
+                  <p>Role: {user.role}</p>
+                </div>
+                <button
+                  onClick={() => handleDelete(user._id)}
+                  className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300"
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-center text-gray-500">No users found</p>
+        )}
+      </div>
     </div>
   );
 };
