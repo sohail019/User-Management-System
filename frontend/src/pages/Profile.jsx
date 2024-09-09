@@ -20,11 +20,14 @@ export const Profile = () => {
     
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("/api/auth/profile", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/auth/profile`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         setProfile(res.data);
         setUsername(res.data.username);
         setEmail(res.data.email);
@@ -42,7 +45,7 @@ export const Profile = () => {
   const handleUpdate = async () => {
     try {
       const res = await axios.put(
-        "/api/auth/profile",
+        `${import.meta.env.VITE_API_URL}/api/auth/profile`,
         { username, email },
         {
           headers: {

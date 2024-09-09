@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
+// import api from "../config/api";
 
 export const Admin = () => {
   const [users, setUsers] = useState([]);
@@ -15,16 +16,23 @@ export const Admin = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        console.log("Fetching users from API..."); // Debugging log
-        const res = await axios.get("http://localhost:5000/api/auth/users", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Ensure token is sent
-          },
-        });
-        console.log("API response:", res.data); // Debugging log
-        setUsers(res.data);
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/auth/users`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        console.log(res)
+        // Ensure res.data is an array
+        if (Array.isArray(res.data)) {
+          setUsers(res.data);
+        } else {
+          console.error("API response is not an array:", res.data);
+        }
       } catch (error) {
-        console.error("Error fetching users:", error); // Debugging log
+        console.error("Error fetching users:", error);
       }
     };
 
@@ -34,7 +42,7 @@ export const Admin = () => {
   const handleRoleChange = (id) => {
     axios
       .put(
-        `http://localhost:5000/api/auth/users/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/auth/users/${id}`,
         { role: newRole },
         {
           headers: {
@@ -54,18 +62,21 @@ export const Admin = () => {
       .catch((err) => console.error(err));
   };
 
-  const handleDelete = async (userId) => {
-    try {
-      await axios.delete(`http://localhost:5000/api/auth/users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      setUsers(users.filter((user) => user._id !== userId));
-    } catch (error) {
-      console.error("Error deleting user:", error);
-    }
-  };
+   const handleDelete = async (userId) => {
+     try {
+       await axios.delete(
+         `${import.meta.env.VITE_API_URL}/api/auth/users/${userId}`,
+         {
+           headers: {
+             Authorization: `Bearer ${localStorage.getItem("token")}`,
+           },
+         }
+       );
+       setUsers(users.filter((user) => user._id !== userId));
+     } catch (error) {
+       console.error("Error deleting user:", error);
+     }
+   };
 
   // Pagination
   const indexOfLastUser = currentPage * usersPerPage;

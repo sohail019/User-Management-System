@@ -45,7 +45,7 @@ export const Register = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        `${import.meta.env.VITE_API_URL}/api/auth/register`, 
         {
           username,
           email,
@@ -69,14 +69,14 @@ export const Register = () => {
   };
 
   return (
-    <section className="flex items-center justify-center">
+    <section className="flex items-center justify-center ">
       <div className="flex flex-col lg:flex-row w-full max-w-4xl mx-auto sm:px-40 md:px-64 lg:px-64">
-        <main className="flex flex-col justify-center flex-grow p-6 rounded-lg">
+        <main className="flex flex-col justify-center flex-grow rounded-lg">
           <h1 className="text-2xl font-bold sm:text-3xl md:text-4xl text-center">
             Register
           </h1>
           <form
-            className="mt-6 flex flex-col gap-4"
+            className="mt-4 flex flex-col gap-4"
             onSubmit={handleFormSubmit}
           >
             {/* Email */}
@@ -177,7 +177,7 @@ export const Register = () => {
               </select>
             </div>
 
-            {error && <p className="text-red-500 text-center">{error}</p>}
+            {error && <p className="text-red-500 text-center text-sm">{error}</p>}
 
             <div className="flex flex-col items-center">
               <button
