@@ -12,12 +12,10 @@ const app = express()
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
-      "https://user-management-system-sohail.netlify.app",
+      "http://localhost:5173", 
+      "https://user-management-system-sohail.netlify.app", 
     ],
-    methods: "GET,POST,PUT,DELETE", // Allow these HTTP methods
-    allowedHeaders: "Content-Type,Authorization", // Allow specific headers
-    credentials: true, // Allow credentials (cookies, authorization headers)
+    credentials: true,
   })
 );
 app.options("*", cors());
