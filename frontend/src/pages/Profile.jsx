@@ -21,7 +21,7 @@ export const Profile = () => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(
-          "https://user-management-system-delta.vercel.app/api/auth/profile",
+          "https://user-management-system-vwcq.onrender.com/api/auth/profile",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -46,7 +46,7 @@ export const Profile = () => {
   const handleUpdate = async () => {
     try {
       const res = await axios.put(
-        "https://user-management-system-delta.vercel.app/api/auth/profile",
+        "https://user-management-system-vwcq.onrender.com/api/auth/profile",
         { username, email },
         {
           headers: {

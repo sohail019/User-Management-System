@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         try {
           console.log("Token used for profile request:", token);
           const response = await axios.get(
-            "https://user-management-system-delta.vercel.app/api/auth/profile",
+            "https://user-management-system-vwcq.onrender.com/api/auth/profile",
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`, // Token from local storage
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const res = await axios.post(
-        "https://user-management-system-delta.vercel.app/api/auth/login",
+        "https://user-management-system-vwcq.onrender.com/api/auth/login",
         {
           email,
           password,
@@ -83,7 +83,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (username, email, password, role) => {
     try {
       const res = await axios.post(
-        "https://user-management-system-delta.vercel.app/api/auth/register",
+        "https://user-management-system-vwcq.onrender.com/api/auth/register",
         {
           username,
           email,

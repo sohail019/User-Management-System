@@ -17,7 +17,7 @@ export const Admin = () => {
     const fetchUsers = async () => {
       try {
         const res = await axios.get(
-          "https://user-management-system-delta.vercel.app/api/auth/users",
+          "https://user-management-system-vwcq.onrender.com/api/auth/users",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -42,9 +42,9 @@ export const Admin = () => {
   const handleRoleChange = (id) => {
     axios
       .put(
-       "https://user-management-system-delta.vercel.app/api/auth/users/${id}",
+        "https://user-management-system-vwcq.onrender.com/api/auth/users/${id}",
         { role: newRole },
-         { withCredentials: true },
+        { withCredentials: true },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -66,7 +66,7 @@ export const Admin = () => {
    const handleDelete = async (userId) => {
      try {
        await axios.delete(
-         "https://user-management-system-delta.vercel.app/api/auth/users/${userId}",
+         "https://user-management-system-vwcq.onrender.com/api/auth/users/${userId}",
          {
            headers: {
              Authorization: `Bearer ${localStorage.getItem("token")}`,

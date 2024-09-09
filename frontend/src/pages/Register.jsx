@@ -45,7 +45,7 @@ export const Register = () => {
 
     try {
       const response = await axios.post(
-        "https://user-management-system-delta.vercel.app/api/auth/register",
+        "https://user-management-system-vwcq.onrender.com/api/auth/register",
         {
           username,
           email,

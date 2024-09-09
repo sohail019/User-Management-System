@@ -23,7 +23,7 @@ export const Login = () => {
     try {
       // Make login request using environment variable and include credentials
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/auth/login`,
+        `https://user-management-system-vwcq.onrender.com/api/auth/login`,
         { email, password },
         { withCredentials: true } // Include credentials for CORS
       );
