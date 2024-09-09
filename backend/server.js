@@ -11,10 +11,9 @@ const app = express()
 //? Middleware
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://user-management-system-frontend-qb2z.onrender.com/",
-    ],
+    origin: "https://user-management-system-frontend-qb2z.onrender.com/",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
