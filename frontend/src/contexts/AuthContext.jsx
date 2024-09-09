@@ -9,30 +9,6 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //    const token = localStorage.getItem("token");
-  //   if (token) {
-  //     console.log("Token used for profile request", token);
-  //     axios
-  //       .get("http://localhost:5000/api/auth/profile", {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       })
-  //       .then((res) => {
-  //         setUser(res.data)
-  //         setLoading(false);
-  //       })
-  //       .catch((err) => {
-  //         console.error("Failed to fetch user profile", err);
-  //         localStorage.removeItem("token");
-  //         setLoading(false)
-  //         // Handle token expiration
-  //         // setToken(null);
-  //       });
-  //   } else{
-  //     setLoading(false)
-  //   }
-  // }, []);
-
   useEffect(() => {
     const fetchUserProfile = async () => {
       const token = localStorage.getItem("token");
@@ -41,9 +17,12 @@ export const AuthProvider = ({ children }) => {
         try {
           console.log("Token used for profile request:", token);
           const response = await axios.get(
-            "http://localhost:5000/api/auth/profile",
+            "https://user-management-system-delta.vercel.app/api/auth/profile",
             {
-              headers: { Authorization: `Bearer ${token}` },
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`, // Token from local storage
+              },
+              withCredentials: true, // Ensures cross-origin credentials are included
             }
           );
 
@@ -67,10 +46,19 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://user-management-system-delta.vercel.app/api/auth/login",
+        {
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // Ensures cross-origin credentials are included
+        }
+      );
 
       if (res.status === 200) {
         const { token, user } = res.data;
@@ -94,12 +82,21 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (username, email, password, role) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
-        username,
-        email,
-        password,
-        role,
-      });
+      const res = await axios.post(
+        "https://user-management-system-delta.vercel.app/api/auth/register",
+        {
+          username,
+          email,
+          password,
+          role,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // Ensures cross-origin credentials are included
+        }
+      );
 
       if (res.status === 201) {
         // Registration successful, now log in the user automatically

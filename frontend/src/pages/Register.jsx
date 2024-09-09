@@ -45,12 +45,18 @@ export const Register = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/auth/register`, 
+        "https://user-management-system-delta.vercel.app/api/auth/register",
         {
           username,
           email,
           password,
           role,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure content type
+          },
+          withCredentials: true, // Include credentials for cross-origin requests
         }
       );
       const { token } = response.data;

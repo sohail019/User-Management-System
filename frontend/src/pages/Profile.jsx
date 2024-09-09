@@ -21,11 +21,12 @@ export const Profile = () => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/auth/profile`,
+          "https://user-management-system-delta.vercel.app/api/auth/profile",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
+            withCredentials: true, // Include credentials for cross-origin requests
           }
         );
         setProfile(res.data);
@@ -45,12 +46,13 @@ export const Profile = () => {
   const handleUpdate = async () => {
     try {
       const res = await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/auth/profile`,
+        "https://user-management-system-delta.vercel.app/api/auth/profile",
         { username, email },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
+          withCredentials: true, // Include credentials
         }
       );
       setProfile(res.data);

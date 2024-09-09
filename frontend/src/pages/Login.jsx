@@ -21,21 +21,30 @@ export const Login = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Make login request using environment variable and include credentials
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/auth/login`,
-        { email, password }
+        { email, password },
+        { withCredentials: true } // Include credentials for CORS
       );
 
-      // Assuming `login` function takes `token` as argument
-      const result = await login(email, password);
+      // If login is successful
+      if (response.status === 200) {
+        const { token, user } = response.data;
 
-      if (result.success) {
+        // Save token and user information
+        localStorage.setItem("token", token);
+
+        // Assuming you set user state in your context or login function
+        await login(email, password); // You can remove this if login is already handled
+
         console.log("Login Successful", response.data);
-        console.log("Navigating to profile");
+
+        // Navigate to profile page after login
         navigate("/profile");
         console.log("Navigated to profile");
       } else {
-        setError(result.message || "Login Failed");
+        setError("Login failed");
       }
     } catch (err) {
       setError("Login Failed");

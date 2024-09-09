@@ -17,7 +17,7 @@ export const Admin = () => {
     const fetchUsers = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/auth/users`,
+          "https://user-management-system-delta.vercel.app/api/auth/users",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -42,8 +42,9 @@ export const Admin = () => {
   const handleRoleChange = (id) => {
     axios
       .put(
-        `${import.meta.env.VITE_API_URL}/api/auth/users/${id}`,
+       "https://user-management-system-delta.vercel.app/api/auth/users/${id}",
         { role: newRole },
+         { withCredentials: true },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -65,7 +66,7 @@ export const Admin = () => {
    const handleDelete = async (userId) => {
      try {
        await axios.delete(
-         `${import.meta.env.VITE_API_URL}/api/auth/users/${userId}`,
+         "https://user-management-system-delta.vercel.app/api/auth/users/${userId}",
          {
            headers: {
              Authorization: `Bearer ${localStorage.getItem("token")}`,
