@@ -12,8 +12,8 @@ const app = express()
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", 
-      "https://user-management-system-sohail.netlify.app", 
+      "http://localhost:5173",
+      "https://user-management-system-frontend-qb2z.onrender.com/",
     ],
     credentials: true,
   })
