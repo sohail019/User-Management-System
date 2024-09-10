@@ -60,7 +60,7 @@ export const Admin = () => {
         setIsModalOpen(false);
         setEditingUser(null);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Error updating role:", err.response || err.message));
   };
 
    const handleDelete = async (userId) => {
@@ -75,7 +75,7 @@ export const Admin = () => {
        );
        setUsers(users.filter((user) => user._id !== userId));
      } catch (error) {
-       console.error("Error deleting user:", error);
+         console.error("Error deleting user:", err.response || err.message);
      }
    };
 
