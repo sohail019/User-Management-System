@@ -42,7 +42,7 @@ export const Admin = () => {
   const handleRoleChange = (id) => {
     axios
       .put(
-        "https://user-management-system-vwcq.onrender.com/api/auth/users/${id}",
+        `https://user-management-system-vwcq.onrender.com/api/auth/users/${id}`,
         { role: newRole },
         { withCredentials: true },
         {
@@ -66,7 +66,7 @@ export const Admin = () => {
    const handleDelete = async (userId) => {
      try {
        await axios.delete(
-         "https://user-management-system-vwcq.onrender.com/api/auth/users/${userId}",
+         `https://user-management-system-vwcq.onrender.com/api/auth/users/${userId}`,
          {
            headers: {
              Authorization: `Bearer ${localStorage.getItem("token")}`,
